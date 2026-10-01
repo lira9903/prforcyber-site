@@ -1,14 +1,69 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Join the Waitlist — PR for Cyber</title>
-  <meta name="description" content="Join the PR for Cyber waitlist.">
+  <meta charset="utf-8">
+  <title>Join the Waitlist — PRforCyber</title>
+  <meta name="description" content="Join the PRforCyber waitlist. Tell us about your cybersecurity research and your markets, and we'll contact you as soon as a Research Positioning Programme slot opens.">
   <link rel="icon" type="image/png" href="/shared/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="/shared/landing.css">
 </head>
 <body>
-  <h1>Join the Waitlist</h1>
-  <p>Coming soon.</p>
+<div class="page page--full">
+
+  <nav class="wl-nav">
+    <a class="wordmark-link" href="/"><span class="wordmark">PR<span>for</span>Cyber</span></a>
+    <a class="wl-nav__back" href="/">← Back to home</a>
+  </nav>
+
+  <div class="wl-main"><div class="wrap wrap--narrow">
+    <div class="eyebrow">
+      <svg class="glyph" width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="1" width="7" height="7" transform="rotate(45 8.5 4.5)" fill="var(--cyan-500)"/><rect x="10" y="7.5" width="7" height="7" transform="rotate(45 13.5 11)" fill="var(--cyan-500)" opacity="0.75"/><rect x="5" y="14" width="7" height="7" transform="rotate(45 8.5 17.5)" fill="var(--cyan-500)"/></svg>
+      <span>Waitlist</span>
+    </div>
+    <h1 class="wl-title">We're at capacity before launch.</h1>
+    <p class="wl-intro">We keep our client list small so every programme gets senior attention. Our current slots are full. Tell us about your research and your markets, and we'll contact you as soon as a programme slot opens, in order of application.</p>
+    <div class="wl-summary mono-line">
+      The Research Positioning Programme · One-time · 2–3 months · From €38,000 · Europe and MENA
+    </div>
+
+    <form class="wl-form" action="https://api.web3forms.com/submit" method="POST">
+      <input type="hidden" name="access_key" value="WEB3FORMS_KEY_PLACEHOLDER">
+      <input type="hidden" name="subject" value="New waitlist signup — prforcyber.io">
+      <input type="hidden" name="redirect" value="https://prforcyber.io/thanks/">
+      <input type="checkbox" name="botcheck" class="hidden" style="display:none">
+      <input type="hidden" name="markets" value="">
+
+      <label class="field">Full name<input class="input" name="name" autocomplete="name" required></label>
+      <label class="field">Work email<input class="input" name="email" type="email" autocomplete="email" required></label>
+      <label class="field">Company<input class="input" name="company" autocomplete="organization" required></label>
+      <label class="field">Role<input class="input" name="role" autocomplete="organization-title"></label>
+      <div class="field">Markets you want to reach
+        <div class="chips">
+          <label class="chip"><input type="checkbox" value="UK &amp; Ireland">UK &amp; Ireland</label>
+          <label class="chip"><input type="checkbox" value="Benelux">Benelux</label>
+          <label class="chip"><input type="checkbox" value="DACH">DACH</label>
+          <label class="chip"><input type="checkbox" value="Spain">Spain</label>
+          <label class="chip"><input type="checkbox" value="France">France</label>
+          <label class="chip"><input type="checkbox" value="Nordics">Nordics</label>
+          <label class="chip"><input type="checkbox" value="MENA">MENA</label>
+        </div>
+      </div>
+      <label class="field">What research would you like positioned? (optional)<textarea class="input" name="research" rows="3"></textarea></label>
+      <label class="field">Preferred start
+        <select class="input" name="preferred_start"><option>Next available</option><option>Q1 2027</option><option>Q2 2027</option><option>Later</option></select>
+      </label>
+      <button class="btn btn--primary btn--lg" type="submit">Join the Waitlist</button>
+    </form>
+  </div></div>
+
+  <footer class="wl-footer">
+    <span class="wordmark wordmark--18">PR<span>for</span>Cyber</span><a href="mailto:info@prforcyber.io">info@prforcyber.io</a>
+  </footer>
+
+</div>
+<script src="/shared/landing.js"></script>
 </body>
 </html>
