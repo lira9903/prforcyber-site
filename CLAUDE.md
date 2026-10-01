@@ -20,7 +20,7 @@
 ## Forms (Web3Forms)
 - `action="https://api.web3forms.com/submit"`, `method="POST"`
 - Hidden fields:
-  - `<input type="hidden" name="access_key" value="WEB3FORMS_KEY_PLACEHOLDER">`
+  - `<input type="hidden" name="access_key" value="b009bce9-d147-406b-9018-aedd5c86e217">`
   - `<input type="hidden" name="subject" value="...">`
   - `<input type="hidden" name="redirect" value="https://prforcyber.io/thanks/">`
   - Honeypot: `<input type="checkbox" name="botcheck" class="hidden" style="display:none">`
