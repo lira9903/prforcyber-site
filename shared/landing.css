@@ -318,8 +318,14 @@ a:not([class]):hover { color: var(--cyan-400); }
 .wl-form { display: flex; flex-direction: column; gap: 20px; }
 .wl-form .btn { margin-top: 8px; }
 .field { display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: var(--text-secondary); }
+/* Indent field labels to line up with the text inside the inputs (14px padding + 1.5px border). */
+.field { text-indent: 15.5px; }
+.field .input, .field .chips { text-indent: 0; }
 .input { font: inherit; font-size: 16px; color: var(--text-primary); background: var(--teal-900); border: var(--border-w) solid var(--border-subtle); border-radius: var(--radius-sm); padding: 12px 14px; outline: none; }
 textarea.input { resize: vertical; font-family: var(--font-sans); }
+/* Custom dropdown arrow, inset to match the input's 14px text padding. */
+select.input { appearance: none; -webkit-appearance: none; padding-right: 42px; cursor: pointer;
+  background: var(--teal-900) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1.5l5 5 5-5' fill='none' stroke='%23C9D6D9' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 16px center; }
 .chips { display: flex; flex-wrap: wrap; gap: 10px; }
 .chip { display: flex; align-items: center; gap: 8px; font-size: 14px; padding: 8px 14px; border-radius: 999px; border: var(--border-w) solid var(--border-subtle); background: transparent; cursor: pointer; color: var(--text-primary); }
 .chip input { accent-color: var(--cyan-500); }
@@ -328,3 +334,60 @@ textarea.input { resize: vertical; font-family: var(--font-sans); }
 
 .wl-footer { display: flex; align-items: center; gap: 24px; padding: 24px 32px 48px; border-top: 1px solid var(--teal-700); }
 .wl-footer a { color: var(--grey-200); font-size: 14px; text-decoration: none; }
+
+/* ---------- Mobile nav (hidden on desktop) ---------- */
+.nav__burger { display: none; }
+.nav__menu { display: none; }
+
+/* ---------- Mobile (< 768px) — from the Claude Design mobile layout ---------- */
+@media (max-width: 767.98px) {
+  :root { --fs-h2: 30px; }
+
+  /* Nav: wordmark + hamburger, dropdown menu */
+  .nav { justify-content: space-between; gap: 16px; height: 60px; padding: 0 12px 0 20px; }
+  .nav .wordmark { font-size: 19px; }
+  .nav__items, .nav__cta { display: none; }
+  .nav__burger { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; width: 44px; height: 44px; padding: 0; background: transparent; border: none; cursor: pointer; }
+  .nav__burger span { width: 22px; height: 2px; background: #fff; transition: transform var(--dur-base) var(--ease-out), opacity var(--dur-fast); }
+  .nav__burger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav__burger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .nav__burger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .nav__menu { display: flex; flex-direction: column; padding: 4px 20px 24px; background: #000; border-bottom: 1px solid var(--teal-700); }
+  .nav__menu[hidden] { display: none; }
+  .nav__mlink { padding: 14px 0; font-size: 20px; color: #fff; text-decoration: none; border-bottom: 1px solid var(--teal-700); }
+  .nav__menu .btn { margin-top: 20px; }
+
+  /* Sections */
+  .sec-72 { padding: 48px 0; }
+  .card--pad-48 { padding: 24px; }
+
+  /* Hero */
+  .hero__title { margin: 32px 0 20px; font-size: 38px; }
+  .hero__ctas { flex-direction: column; gap: 12px; margin-top: 28px; }
+  .hero__stats { gap: 28px; margin-top: 48px; padding-top: 32px; }
+
+  /* How it works: week label above each step */
+  .how__row { grid-template-columns: 1fr; gap: 10px; }
+
+  /* Investment */
+  .price-card { padding: 20px; }
+  .price-card__name { font-size: 22px; line-height: 1.2; }
+  .price-card__price span { font-size: 34px; }
+  .metric--last { flex-wrap: wrap; gap: 6px 24px; }
+  .metric--last .metric__value { white-space: normal; text-align: left; line-height: 1.5; }
+
+  /* Results */
+  .quote { padding: 24px 20px; }
+  .quote p { font-size: 20px; }
+  .results__ctas { flex-wrap: wrap; }
+
+  /* Waitlist teaser */
+  .teaser { padding: 48px 0; }
+  .teaser__title { font-size: 28px; line-height: 1.15; text-wrap: balance; }
+
+  /* Waitlist page */
+  .wl-nav { height: 60px; padding: 0 20px; gap: 16px; }
+  .wl-main { padding: 40px 0 56px; }
+  .wl-title { font-size: 32px; }
+  .wl-footer { padding: 24px 20px 48px; flex-wrap: wrap; }
+}

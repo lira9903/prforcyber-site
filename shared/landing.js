@@ -1,10 +1,23 @@
 // PRforCyber landing — behaviour carried over from the Claude Design export.
 (function () {
   var NAV_HEIGHT = 68;
+  var nav = document.querySelector(".nav");
+  var burger = document.querySelector(".nav__burger");
+  var menu = document.getElementById("mobile-menu");
+
+  function setMenu(open) {
+    if (!burger || !menu) return;
+    burger.setAttribute("aria-expanded", open ? "true" : "false");
+    menu.hidden = !open;
+  }
+
+  // Mobile hamburger menu.
+  if (burger) burger.addEventListener("click", function () { setMenu(menu.hidden); });
 
   function scrollToSection(id) {
     var el = document.getElementById(id);
-    if (el) window.scrollTo({ top: el.offsetTop - NAV_HEIGHT, behavior: "smooth" });
+    var offset = (nav && nav.offsetHeight) || NAV_HEIGHT;
+    if (el) window.scrollTo({ top: el.offsetTop - offset, behavior: "smooth" });
   }
 
   // In-page links (nav items, "See the Programme"): smooth scroll under the sticky nav.
@@ -17,6 +30,7 @@
         document.querySelectorAll(".nav__link.is-active").forEach(function (a) { a.classList.remove("is-active"); });
         link.classList.add("is-active");
       }
+      setMenu(false);
       scrollToSection(id);
     });
   });
