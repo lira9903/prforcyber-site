@@ -1,5 +1,6 @@
-// PRforCyber — Google Analytics 4 with Consent Mode v2 and a cookie consent banner.
-// Load synchronously in <head>, before the gtag.js script, so the consent default is set first.
+// PRforCyber — Google Analytics 4 behind a cookie consent banner.
+// Privacy-strict: gtag.js is only fetched after the visitor clicks Accept. With no choice or Decline,
+// nothing is requested from Google. Calls to gtag() before that just queue up locally in dataLayer.
 (function () {
   var GA_ID = "G-C64CSBL070";
   var KEY = "prfc_consent"; // "granted" | "denied"
@@ -14,18 +15,40 @@
     try { localStorage.setItem(KEY, value); } catch (e) {}
   }
 
-  // Consent Mode v2: everything denied until the visitor clicks Accept.
+  // Consent Mode v2 defaults, so GA stays denied even if it were loaded some other way.
   gtag("consent", "default", {
     analytics_storage: "denied",
     ad_storage: "denied",
     ad_user_data: "denied",
-    ad_personalization: "denied",
-    wait_for_update: 500
+    ad_personalization: "denied"
   });
-  if (getChoice() === "granted") gtag("consent", "update", { analytics_storage: "granted" });
-
   gtag("js", new Date());
   gtag("config", GA_ID);
+
+  var gaLoaded = false;
+  function loadGA() {
+    if (gaLoaded) return;
+    gaLoaded = true;
+    gtag("consent", "update", { analytics_storage: "granted" });
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+    document.head.appendChild(s);
+  }
+
+  // Remove GA cookies (_ga, _ga_<id>) when consent is withdrawn.
+  function clearGACookies() {
+    var host = location.hostname.replace(/^www\./, "");
+    document.cookie.split(";").forEach(function (c) {
+      var name = c.split("=")[0].trim();
+      if (name.indexOf("_ga") !== 0) return;
+      ["", "; domain=" + host, "; domain=." + host].forEach(function (d) {
+        document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/" + d;
+      });
+    });
+  }
+
+  if (getChoice() === "granted") loadGA();
 
   // ---------- Banner ----------
   var banner;
@@ -58,7 +81,12 @@
       var choice = e.target.getAttribute && e.target.getAttribute("data-cc");
       if (!choice) return;
       saveChoice(choice);
-      gtag("consent", "update", { analytics_storage: choice });
+      if (choice === "granted") {
+        loadGA();
+      } else {
+        gtag("consent", "update", { analytics_storage: "denied" });
+        clearGACookies();
+      }
       hideBanner();
     });
     document.body.appendChild(banner);

@@ -28,15 +28,19 @@
 ## Analytics + cookie consent (every page)
 - Every page — including new ones — must include this snippet in `<head>`, right after the favicon link:
   ```html
-  <!-- Google Analytics 4 + cookie consent (Consent Mode v2) -->
+  <!-- Google Analytics 4 + cookie consent (gtag.js loads only after Accept) -->
   <link rel="stylesheet" href="/shared/consent.css">
   <script src="/shared/consent.js"></script>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C64CSBL070"></script>
   ```
-- `consent.js` must load before `gtag.js` (it sets `analytics_storage` to denied by default) and shows the Accept/Decline banner. Never set consent to granted by default.
-- GA4 Measurement ID: `G-C64CSBL070`.
-- `/thanks/` fires the `generate_lead` event when the `prfc_lead` sessionStorage flag (set on waitlist form submit in `landing.js`) is present.
+- Privacy-strict: `consent.js` injects `gtag.js` **only after the visitor clicks Accept** (or has accepted before). With no choice or Decline there must be zero requests to Google domains. Never add a `<script src="https://www.googletagmanager.com/...">` tag to a page, and never default consent to granted.
+- GA4 Measurement ID: `G-C64CSBL070` (set in `consent.js`).
+- `/thanks/` fires the `generate_lead` event when the `prfc_lead` sessionStorage flag (set on waitlist form submit in `landing.js`) is present. It only reaches Google if the visitor accepted.
 - Footers link to `/privacy/`. Update the privacy page if new data collection or third-party services are added.
+
+## No third-party requests
+- Pages may only load files from this site. The only allowed external requests are Google Analytics after Accept, and the Web3Forms form POST on submit.
+- Fonts are self-hosted in `/shared/fonts/` (woff2, declared with `@font-face` at the top of `shared/landing.css`). Never link to Google Fonts (`fonts.googleapis.com` / `fonts.gstatic.com`) or any other CDN. New fonts: download the woff2 files into `/shared/fonts/` with their licence.
+- When a Claude Design export includes font links or CDN scripts, replace them with self-hosted files or static HTML.
 
 ## SEO + sharing (every page)
 - Every page's `<head>` has, right after `<meta name="description">`:
