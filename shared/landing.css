@@ -279,8 +279,9 @@ a:not([class]):hover { color: var(--cyan-400); }
 .how__body { font-size: 16px; line-height: 1.5; color: var(--text-secondary); max-width: 640px; }
 
 .included { background: var(--pattern-dots-light) 0 0/57px 57px, var(--mint-50); }
-.included__grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(300px,1fr)); gap: 48px; align-items: start; }
-.included__list { display: flex; flex-direction: column; gap: 12px; }
+.included__headrow { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
+.included__list { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+.included__list .check:last-child:nth-child(odd) { grid-column: 1 / -1; }
 
 .investment { background: #000; }
 .price-card { padding: 40px; border-radius: 24px; margin-top: 40px; }
@@ -384,6 +385,10 @@ select.input { appearance: none; -webkit-appearance: none; padding-right: 42px; 
   .hero__title { margin: 32px 0 20px; font-size: 38px; }
   .hero__ctas { flex-direction: column; gap: 12px; margin-top: 28px; }
   .hero__stats { gap: 28px; margin-top: 48px; padding-top: 32px; }
+
+  /* What is included: stacked header, one column of cards */
+  .included__headrow { grid-template-columns: 1fr; gap: 24px; }
+  .included__list { grid-template-columns: 1fr; gap: 12px; margin-top: 32px; }
 
   /* How it works: week label above each step */
   .how__row { grid-template-columns: 1fr; gap: 10px; }
