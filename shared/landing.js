@@ -48,6 +48,8 @@
     form.addEventListener("submit", function () {
       var picked = Array.prototype.map.call(form.querySelectorAll(".chip input:checked"), function (b) { return b.value; });
       form.querySelector('input[name="markets"]').value = picked.join(", ") || "None selected";
+      // Lets /thanks/ fire the GA4 generate_lead event once.
+      try { sessionStorage.setItem("prfc_lead", "1"); } catch (e) {}
     });
   }
 })();

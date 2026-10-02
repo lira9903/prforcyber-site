@@ -25,6 +25,30 @@
   - `<input type="hidden" name="redirect" value="https://prforcyber.io/thanks/">`
   - Honeypot: `<input type="checkbox" name="botcheck" class="hidden" style="display:none">`
 
+## Analytics + cookie consent (every page)
+- Every page — including new ones — must include this snippet in `<head>`, right after the favicon link:
+  ```html
+  <!-- Google Analytics 4 + cookie consent (Consent Mode v2) -->
+  <link rel="stylesheet" href="/shared/consent.css">
+  <script src="/shared/consent.js"></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-C64CSBL070"></script>
+  ```
+- `consent.js` must load before `gtag.js` (it sets `analytics_storage` to denied by default) and shows the Accept/Decline banner. Never set consent to granted by default.
+- GA4 Measurement ID: `G-C64CSBL070`.
+- `/thanks/` fires the `generate_lead` event when the `prfc_lead` sessionStorage flag (set on waitlist form submit in `landing.js`) is present.
+- Footers link to `/privacy/`. Update the privacy page if new data collection or third-party services are added.
+
+## SEO + sharing (every page)
+- Every page's `<head>` has, right after `<meta name="description">`:
+  - `<link rel="canonical" href="https://prforcyber.io/<path>/">` — always the https://prforcyber.io URL with trailing slash (`/` for home). Skip on noindex pages.
+  - Open Graph + Twitter card tags: `og:type`, `og:site_name` (PRforCyber), `og:title` and `og:description` (same as `<title>` / meta description), `og:url` (canonical URL), `og:image` + `og:image:width` 1200 + `og:image:height` 630 + `og:image:alt`, `twitter:card` = `summary_large_image`, `twitter:title`, `twitter:description`, `twitter:image`. Copy the block from `/waitlist/index.html`.
+  - Image URLs must be absolute: `https://prforcyber.io/shared/img/og-image.png` (1200x630 share image). No `twitter:site`/handle (no X links).
+- Pages that shouldn't be indexed (`/thanks/`, `404.html`, any utility page) get `<meta name="robots" content="noindex">` instead of a canonical, and stay out of the sitemap.
+- New indexable page → add it to `sitemap.xml` (with `<lastmod>`). Update `<lastmod>` when a page's content changes meaningfully.
+- `robots.txt` allows everything and points to the sitemap. Don't block pages there; use noindex instead.
+- Homepage keeps the JSON-LD `Organization` schema (name, url, logo `/shared/img/logo.png`, email). Update it if contact details change. Never add LinkedIn/X to `sameAs`.
+- `404.html` at the root is GitHub Pages' not-found page. Use root-relative links (`/shared/...`) on it.
+
 ## Content rules
 - No LinkedIn or X links.
 
