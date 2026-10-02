@@ -50,6 +50,8 @@
 - `404.html` at the root is GitHub Pages' not-found page. Use root-relative links (`/shared/...`) on it.
 
 ## Content rules
+- British spelling throughout (programme, optimised, enquiry).
+- Number ranges use a regular hyphen with non-breaking spaces: `50&nbsp;-&nbsp;60`, `2&nbsp;-&nbsp;3 months` (renders "50 - 60"). No en dashes in ranges.
 - No LinkedIn or X links.
 
 ## Workflow
